@@ -1,0 +1,1 @@
+module.exports = require("npm:pegjs@0.9.0/lib/peg");

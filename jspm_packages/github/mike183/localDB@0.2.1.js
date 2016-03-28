@@ -1,0 +1,1 @@
+module.exports = require("github:mike183/localDB@0.2.1/localDB.js");
