@@ -36,8 +36,8 @@ var config = {
         'swagger-client',
         'jquery',
         'moment',
-        'bootstrap/css/bootstrap.css!text',
-        'bootstrap'
+        'bootstrap',
+        'bootstrap/css/bootstrap.css!text'
       ],
       options: {
         inject: true,

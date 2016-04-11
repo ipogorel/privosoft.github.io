@@ -7440,9 +7440,9 @@ define("layout/widgets/widget.html!github:systemjs/plugin-text@0.0.3.js", [], fu
 
 })();
 'use strict';
-System.register("main.js", [], function(_export, _context) {
+System.register("main.js", ["font-awesome"], function(_export, _context) {
   return {
-    setters: [],
+    setters: [function(_fontAwesome) {}],
     execute: function() {
       function configure(aurelia) {
         aurelia.use.standardConfiguration().developmentLogging().plugin('aurelia-animator-css');

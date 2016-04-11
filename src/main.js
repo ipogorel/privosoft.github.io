@@ -1,3 +1,4 @@
+import 'font-awesome'
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
