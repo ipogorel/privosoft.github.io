@@ -1,30 +1,41 @@
 import {WidgetContent} from './widget-content';
-import {DataHelper} from 'helpers/data-helper';
+import {Query} from './../../data/query'
 import $ from 'jquery';
+import * as _ from 'lodash';
 import kendo from 'kendo-ui';
 
 export class GridContent extends WidgetContent {
   constructor(widget) {
     super(widget);
-    this.columns = this.settings.columns;
+    this.columns = this.settings.columns? this.settings.columns : [];
     this.navigatable = this.settings.navigatable;
-
+    this.autoGenerateColumns = this.settings.autoGenerateColumns;
+    
     var self = this;
     this._gridDataSource = new kendo.data.DataSource({
       type: "json",
-      pageSize: self.dataHolder.take,
+      pageSize: self.widget.settings.pageSize ? self.widget.settings.pageSize : 20,
       serverPaging: true,
       serverSorting: true,
-      group: self.dataHolder.group,
+      group: self.widget.settings.group,
       transport: {
         read: options=> {
-          self.dataHolder.sort = options.data.sort;
-          self.dataHolder.take = options.data.take;
-          self.dataHolder.skip = options.data.skip;
-          self.dataHolder.load().then(d=>{
-            options.success(self.dataHolder);
-            //self.resreshColumns(self.widget.dataHolder.fields);
-          });
+          if (self.widget.dataSource){
+            var query = new Query();
+            query.sort = options.data.sort;
+            query.take = options.data.take;
+            query.skip = options.data.skip;
+            query.serverSideFilter = self.widget.dataFilter;
+            self.widget.dataSource.getData(query).then(dH=>{
+              this.data = dH.data;
+              options.success(dH);
+            }, error => {
+              this.data = [];
+              options.success({total:0,data:[]});
+            });
+          }
+          else
+            options.error();
         }
       },
       schema: {
@@ -57,17 +68,54 @@ export class GridContent extends WidgetContent {
     return this._columns;
   }
 
+  get autoGenerateColumns(){
+    return this._autoGenerateColumns;
+  }
+  set autoGenerateColumns(value){
+    this._autoGenerateColumns = value;
+  }
+
+
+  get data(){
+    return this._data;
+  }
+  set data(value){
+    this._data = value;
+  }
+
+  get kendoGrid(){
+
+  }
+
   refresh(){
-    this._gridDataSource.read();
+    this.destroyGrid();
+    if (this.autoGenerateColumns)
+      this.columns = [];
+    this.createGrid();
+    this._gridDataSource.read().then(x=>{
+    });
   }
 
   attached() {
     this.restoreState();
+    this.createGrid();
+    this._gridDataSource.read();
 
+  }
+
+  destroyGrid(){
+    if ($(this.gridElement).data("kendoGrid"))
+      $(this.gridElement).data("kendoGrid").destroy();
+    $(this.gridElement).empty()
+
+
+  }
+  createGrid(){
     var me = this;
     me._grid = $(this.gridElement).kendoGrid({
       dataSource: this._gridDataSource,
       autoBind: false,
+      groupable: true,
       height: this._calculateHeight(this.gridElement),
       sortable: true,
       scrollable: {
@@ -81,16 +129,18 @@ export class GridContent extends WidgetContent {
           display: "{2} data items"
         }
       },
-      filterable: {
+      /*filterable: {
         mode: "row"
-      },
+      },*/
       navigatable: true, //this.navigatable,
       navigate: e => {
         // select the entire row
         var row = $(e.element).closest("tr");
-
         var colIdx = $("td,th", row).index(e.element);
-        var col = me.columns[colIdx-1];
+        var dataColIdx = $("td[role='gridcell']", row).index(e.element);
+        var col;
+        if (me.columns)
+          col = me.columns[dataColIdx];
         if ((col)&&(col.selectable)) {
           if (col!=this.selectedCol) {
             $(me.gridElement).find('th').removeClass("col-selected")
@@ -104,7 +154,6 @@ export class GridContent extends WidgetContent {
           $(me.gridElement).find('th').removeClass("col-selected");
         me._grid.data("kendoGrid").select(row);
       },
-      groupable: true,
       columnMenu:true,
       columnMenuInit: e=> {
         var menu = e.container.find(".k-menu").data("kendoMenu");
@@ -134,10 +183,10 @@ export class GridContent extends WidgetContent {
         });
       }
     });
-    this._gridDataSource.read();
+
   }
 
-  resreshColumns(columnsSet){
+  /*resreshColumns(columnsSet){
     if ($(this.gridElement).data("kendoGrid")) {
       for (let fld of columnsSet) {
         var c = _.find(this.columns, {'field': fld.field});
@@ -150,7 +199,7 @@ export class GridContent extends WidgetContent {
         columns: this.columns
       });
     }
-  }
+  }*/
 
 
   saveState(){
@@ -215,9 +264,12 @@ export class GridContent extends WidgetContent {
     c.hidden=(!c.hidden);
     if (!c.format)
       c.format = this.getColumnFormat(c.field, this._gridDataSource.data());
-    $(this.gridElement).data("kendoGrid").setOptions({
-      columns: this.columns
-    });
+    if (c.hidden)
+      $(this.gridElement).data("kendoGrid").hideColumn(c.field);
+    else
+      $(this.gridElement).data("kendoGrid").showColumn(c.field);
+
+
     this.saveState();
     return true;
   }

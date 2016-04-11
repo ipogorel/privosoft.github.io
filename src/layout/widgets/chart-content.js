@@ -1,4 +1,6 @@
+import {Query} from './../../data/query'
 import {WidgetContent} from './widget-content';
+import * as _ from 'lodash';
 import $ from 'jquery';
 import kendo from 'kendo-ui';
 
@@ -11,16 +13,16 @@ export class ChartContent extends WidgetContent {
       type: "json",
       transport: {
         read: options=> {
-          self.dataHolder.load().then(d=> {
-            self.dataHolder.data = self.mapData(self.dataHolder.data, self.settings.categoriesField);
-            //var d  = {data: self.mapData(self.dataHolder.data, self.settings.categoriesField)};
-            options.success(self.dataHolder);
+          let query = new Query();
+          query.serverSideFilter = self.widget.dataFilter;
+          self.widget.dataSource.getData(query).then(dH=>{
+            var a = 1;
+            options.success(self.mapData(dH.data, self.settings.categoriesField));
           });
         }
       },
       schema: {
-        type: "json",
-        data: "data"
+        type: "json"
       }
     });
   }
@@ -29,7 +31,7 @@ export class ChartContent extends WidgetContent {
     this._chartDataSource.read();
   }
 
-  attached() {
+  attached(){
     $(this.chartElement).kendoChart({
       autoBind: false,
       dataSource: this._chartDataSource,
@@ -44,7 +46,6 @@ export class ChartContent extends WidgetContent {
         field: "value"
       }],
       valueAxis: {
-        max: 100,
         majorGridLines: {
           visible: false
         },
@@ -60,7 +61,10 @@ export class ChartContent extends WidgetContent {
         }
       }
     });
+    $(this.chartElement).data("kendoChart").refresh();
   }
+
+
 
   mapData(data, categoryField){
     var result = []

@@ -1,6 +1,6 @@
 "use strict";
 
-System.register(["helpers/url-helper"], function (_export, _context) {
+System.register(["./../helpers/url-helper"], function (_export, _context) {
   var UrlHelper, StateUrlParser;
 
   function _classCallCheck(instance, Constructor) {

@@ -1,0 +1,1 @@
+module.exports = require("npm:swagger-client@2.1.13/index");

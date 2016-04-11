@@ -1,10 +1,10 @@
-import {Container, Decorators, customElement, bindable, inject} from 'aurelia-framework';
+import {Container, Decorators, bindable} from 'aurelia-framework';
 import {EventAggregator} from 'aurelia-event-aggregator';
 import $ from 'jquery';
 import {bootstrap} from 'bootstrap'
 import {WidgetContent} from './widget-content';
-import {DslExpressionManagerFactory} from 'dsl/dsl-expression-manager-factory';
-import {StringHelper} from 'helpers/string-helper';
+import {DslExpressionManagerFactory} from './../../dsl/dsl-expression-manager-factory';
+import {StringHelper} from './../../helpers/string-helper';
 
 
 export class DslSearchBoxContent extends WidgetContent {
@@ -68,19 +68,17 @@ export class DslSearchBoxContent extends WidgetContent {
   }
 
   refresh(){
-    this._expressionManagerFactory.createInstance(this.dataHolder, this.widget.dataSource.transport.readService.configuration.schema.fields).then(
+      var self = this;
+      this._expressionManagerFactory.createInstance(this.widget.dataSource).then(
         x=> {
-        this.expressionManager = x;
-        if (this.widget.state){
-          this.searchString = this.widget.state;
-          this.suggestionsListSettings.displaySuggestions = false;
-        }
-      });
+          self.expressionManager = x;
+          if (self.widget.state){
+            self.searchString = self.widget.state;
+            self.suggestionsListSettings.displaySuggestions = false;
+          }
+        });
   }
-
-
-
-
+  
 
   get searchString(){
     return this._searchString;

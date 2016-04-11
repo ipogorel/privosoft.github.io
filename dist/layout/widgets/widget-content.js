@@ -1,7 +1,7 @@
 "use strict";
 
-System.register(["navigator/events/widget-event"], function (_export, _context) {
-  var WidgetEvent, _createClass, WidgetContent;
+System.register([], function (_export, _context) {
+  var _createClass, WidgetContent;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -10,9 +10,7 @@ System.register(["navigator/events/widget-event"], function (_export, _context) 
   }
 
   return {
-    setters: [function (_navigatorEventsWidgetEvent) {
-      WidgetEvent = _navigatorEventsWidgetEvent.WidgetEvent;
-    }],
+    setters: [],
     execute: function () {
       _createClass = function () {
         function defineProperties(target, props) {
@@ -39,12 +37,11 @@ System.register(["navigator/events/widget-event"], function (_export, _context) 
           this._widget = widget;
         }
 
-        WidgetContent.prototype.refresh = function refresh() {
-          this.dataHolder.cacheKey();
-        };
+        WidgetContent.prototype.refresh = function refresh() {};
 
-        WidgetContent.prototype._calculateHeight = function _calculateHeight(contentRootElement) {
-          var p = $(contentRootElement).parents(".widget-container");
+        WidgetContent.prototype._calculateHeight = function _calculateHeight(contentContainerElement) {
+          if (!contentContainerElement) return this.settings.minHeight;
+          var p = $(contentContainerElement).parents(".widget-container");
           var headerHeight = p.find(".portlet-header")[0].scrollHeight;
           var parentHeight = p[0].offsetHeight - headerHeight;
           return parentHeight > this.settings.minHeight ? parentHeight : this.settings.minHeight;
@@ -54,14 +51,6 @@ System.register(["navigator/events/widget-event"], function (_export, _context) 
           key: "widget",
           get: function get() {
             return this._widget;
-          }
-        }, {
-          key: "dataHolder",
-          get: function get() {
-            return this._widget.dataHolder;
-          },
-          set: function set(value) {
-            this._widget.dataHolder = value;
           }
         }, {
           key: "settings",
@@ -77,4 +66,4 @@ System.register(["navigator/events/widget-event"], function (_export, _context) 
     }
   };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxheW91dC93aWRnZXRzL3dpZGdldC1jb250ZW50LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7QUFBUTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OytCQUdLO0FBQ1gsaUJBRFcsYUFDWCxDQUFZLE1BQVosRUFBb0I7Z0NBRFQsZUFDUzs7QUFDbEIsZUFBSyxPQUFMLEdBQWUsTUFBZixDQURrQjtTQUFwQjs7QUFEVyxnQ0FxQlgsNkJBQVM7QUFDUCxlQUFLLFVBQUwsQ0FBZ0IsUUFBaEIsR0FETzs7O0FBckJFLGdDQXlCWCw2Q0FBaUIsb0JBQW1CO0FBQ2xDLGNBQUksSUFBSSxFQUFFLGtCQUFGLEVBQXNCLE9BQXRCLENBQThCLG1CQUE5QixDQUFKLENBRDhCO0FBRWxDLGNBQUksZUFBZSxFQUFFLElBQUYsQ0FBTyxpQkFBUCxFQUEwQixDQUExQixFQUE2QixZQUE3QixDQUZlO0FBR2xDLGNBQUksZUFBZSxFQUFFLENBQUYsRUFBSyxZQUFMLEdBQW9CLFlBQXBCLENBSGU7QUFJbEMsaUJBQU8sZUFBZSxLQUFLLFFBQUwsQ0FBYyxTQUFkLEdBQXlCLFlBQXhDLEdBQXVELEtBQUssUUFBTCxDQUFjLFNBQWQsQ0FKNUI7OztxQkF6QnpCOzs4QkFLRTtBQUNYLG1CQUFPLEtBQUssT0FBTCxDQURJOzs7OzhCQUtJO0FBQ2YsbUJBQU8sS0FBSyxPQUFMLENBQWEsVUFBYixDQURROzs0QkFHRixPQUFPO0FBQ3BCLGlCQUFLLE9BQUwsQ0FBYSxVQUFiLEdBQTBCLEtBQTFCLENBRG9COzs7OzhCQUdQO0FBQ2IsbUJBQU8sS0FBSyxNQUFMLENBQVksUUFBWixDQURNOzs7O2VBaEJKIiwiZmlsZSI6ImxheW91dC93aWRnZXRzL3dpZGdldC1jb250ZW50LmpzIiwic291cmNlUm9vdCI6Ii9zcmMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxheW91dC93aWRnZXRzL3dpZGdldC1jb250ZW50LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OytCQUFhO0FBQ1gsaUJBRFcsYUFDWCxDQUFZLE1BQVosRUFBb0I7Z0NBRFQsZUFDUzs7QUFDbEIsZUFBSyxPQUFMLEdBQWUsTUFBZixDQURrQjtTQUFwQjs7QUFEVyxnQ0FhWCw2QkFBUzs7QUFiRSxnQ0FpQlgsNkNBQWlCLHlCQUF3QjtBQUN2QyxjQUFJLENBQUMsdUJBQUQsRUFDRixPQUFPLEtBQUssUUFBTCxDQUFjLFNBQWQsQ0FEVDtBQUVBLGNBQUksSUFBSSxFQUFFLHVCQUFGLEVBQTJCLE9BQTNCLENBQW1DLG1CQUFuQyxDQUFKLENBSG1DO0FBSXZDLGNBQUksZUFBZSxFQUFFLElBQUYsQ0FBTyxpQkFBUCxFQUEwQixDQUExQixFQUE2QixZQUE3QixDQUpvQjtBQUt2QyxjQUFJLGVBQWUsRUFBRSxDQUFGLEVBQUssWUFBTCxHQUFvQixZQUFwQixDQUxvQjtBQU12QyxpQkFBTyxlQUFlLEtBQUssUUFBTCxDQUFjLFNBQWQsR0FBeUIsWUFBeEMsR0FBdUQsS0FBSyxRQUFMLENBQWMsU0FBZCxDQU52Qjs7O3FCQWpCOUI7OzhCQUtFO0FBQ1gsbUJBQU8sS0FBSyxPQUFMLENBREk7Ozs7OEJBSUU7QUFDYixtQkFBTyxLQUFLLE1BQUwsQ0FBWSxRQUFaLENBRE07Ozs7ZUFUSiIsImZpbGUiOiJsYXlvdXQvd2lkZ2V0cy93aWRnZXQtY29udGVudC5qcyIsInNvdXJjZVJvb3QiOiIvc3JjIn0=

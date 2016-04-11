@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['./storage', 'app-config', 'aurelia-framework', 'lodash'], function (_export, _context) {
+System.register(['./storage', './../app-config', 'aurelia-framework', 'lodash'], function (_export, _context) {
   var Storage, AppConfig, inject, lodash, _dec, _class, UserStateStorage;
 
   function _classCallCheck(instance, Constructor) {

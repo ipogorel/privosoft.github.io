@@ -1,7 +1,7 @@
 'use strict';
 
 System.register(['./cache-storage', 'lodash'], function (_export, _context) {
-  var CacheStorage, lodash, MemoryCacheStorage;
+  var CacheStorage, _, MemoryCacheStorage;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -37,7 +37,7 @@ System.register(['./cache-storage', 'lodash'], function (_export, _context) {
     setters: [function (_cacheStorage) {
       CacheStorage = _cacheStorage.CacheStorage;
     }, function (_lodash) {
-      lodash = _lodash.default;
+      _ = _lodash.default;
     }],
     execute: function () {
       _export('MemoryCacheStorage', MemoryCacheStorage = function (_CacheStorage) {

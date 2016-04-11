@@ -1,11 +1,12 @@
 import {DataHelper} from '../helpers/data-helper';
+import {Query} from '../data/query';
 import {StringHelper} from '../helpers/string-helper';
 import lodash from 'lodash';
 
 export class DslExpressionManager {
 
-  constructor(parser, dataHolder, fieldsList) {
-    this.dataHolder = dataHolder;
+  constructor(parser, dataSource, fieldsList) {
+    this.dataSource = dataSource;
     this.fields = fieldsList;
     this.parser = parser;
   }
@@ -68,7 +69,7 @@ export class DslExpressionManager {
         case "STRING_FIELD_NAME":
         case "NUMERIC_FIELD_NAME":
         case "DATE_FIELD_NAME":
-          var filteredFields = lastWord? _.filter(this.fields,f=>{return f.startsWith(lastWord)}) : this.fields;
+          var filteredFields = lastWord? _.filter(this.fields,f=>{return f.toLowerCase().startsWith(lastWord.toLowerCase())}) : this.fields;
           resolve(this._normalizeData("field", filteredFields.sort()));
           break;
         case "STRING_OPERATOR_EQUAL":
@@ -127,8 +128,10 @@ export class DslExpressionManager {
   _getLastFieldName(searchStr, fieldsArray, index) {
     var tmpArr = searchStr.substr(0, index).split(" ");
     for (let i=(tmpArr.length-1); i>=0; i--)  {
-      if (fieldsArray.findIndex(x=>x == tmpArr[i].trim())>=0)
-        return tmpArr[i].trim();
+      let j = fieldsArray.findIndex(x=>x.toLowerCase() == tmpArr[i].trim().toLowerCase());
+      if (j>=0)
+        return fieldsArray[j];
+        //return tmpArr[i].trim();
     }
     return "";
 
@@ -140,15 +143,16 @@ export class DslExpressionManager {
 
 
   _getFieldValuesArray(fieldName, lastWord) {
-    this.dataHolder.take = 100;
-    this.dataHolder.skip = 0;
+    let query = new Query();
+    query.take = 100;
+    query.skip = 0;
     if (lastWord)
-      this.dataHolder.query.serverSideFilter = this.parse(fieldName + " = '" + lastWord + "%'");
+      query.serverSideFilter = this.parse(fieldName + " = '" + lastWord + "%'");
     else
-      this.dataHolder.query.serverSideFilter ="";
-    this.dataHolder.fields = [fieldName];
-    return this.dataHolder.load().then(d=>{
-      var result = _.map(this.dataHolder.data,fieldName);
+      query.serverSideFilter ="";
+    query.fields = [fieldName];
+    return this.dataSource.getData(query).then(dH=>{
+      var result = _.map(dH.data,fieldName);
       return _.uniq(result).sort();
     })
   }

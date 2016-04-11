@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-System.register(['aurelia-framework'], function (_export, _context) {
-  var inject, _createClass, CacheManager;
+System.register([], function (_export, _context) {
+  var _createClass, CacheManager;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -10,9 +10,7 @@ System.register(['aurelia-framework'], function (_export, _context) {
   }
 
   return {
-    setters: [function (_aureliaFramework) {
-      inject = _aureliaFramework.inject;
-    }],
+    setters: [],
     execute: function () {
       _createClass = function () {
         function defineProperties(target, props) {
@@ -32,7 +30,7 @@ System.register(['aurelia-framework'], function (_export, _context) {
         };
       }();
 
-      _export('CacheManager', CacheManager = function () {
+      _export("CacheManager", CacheManager = function () {
         function CacheManager(storage) {
           _classCallCheck(this, CacheManager);
 
@@ -58,7 +56,7 @@ System.register(['aurelia-framework'], function (_export, _context) {
         };
 
         _createClass(CacheManager, [{
-          key: 'cleanInterval',
+          key: "cleanInterval",
           get: function get() {
             return this._cleanInterval;
           }
@@ -67,8 +65,8 @@ System.register(['aurelia-framework'], function (_export, _context) {
         return CacheManager;
       }());
 
-      _export('CacheManager', CacheManager);
+      _export("CacheManager", CacheManager);
     }
   };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNhY2hlL2NhY2hlLW1hbmFnZXIuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7OztBQUFROzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OEJBR0s7QUFDWCxpQkFEVyxZQUNYLENBQVksT0FBWixFQUFvQjtnQ0FEVCxjQUNTOztBQUNsQixlQUFLLGFBQUwsR0FBcUIsT0FBckIsQ0FEa0I7QUFFbEIsZUFBSyxjQUFMLEdBQXNCLElBQXRCLENBRmtCO1NBQXBCOztBQURXLCtCQVFYLHVDQUFjO0FBQ1osY0FBSSxDQUFDLEtBQUssT0FBTCxFQUFjO0FBQ2pCLGdCQUFJLE9BQU8sSUFBUCxDQURhO0FBRWpCLGlCQUFLLE9BQUwsR0FBZSxPQUFPLFdBQVAsQ0FBbUIsWUFBSztBQUNyQyxtQkFBSyxhQUFMLENBQW1CLGFBQW5CLEdBRHFDO2FBQUwsRUFFL0IsS0FBSyxjQUFMLENBRkgsQ0FGaUI7V0FBbkI7OztBQVRTLCtCQWlCWCxxQ0FBYTtBQUNYLGNBQUksS0FBSyxPQUFMLEVBQ0YsT0FBTyxhQUFQLENBQXFCLEtBQUssT0FBTCxDQUFyQixDQURGOzs7QUFsQlMsK0JBc0JYLG1DQUFZO0FBQ1YsaUJBQU8sS0FBSyxhQUFMLENBREc7OztxQkF0QkQ7OzhCQU1TO0FBQUMsbUJBQU8sS0FBSyxjQUFMLENBQVI7Ozs7ZUFOVCIsImZpbGUiOiJjYWNoZS9jYWNoZS1tYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6Ii9zcmMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNhY2hlL2NhY2hlLW1hbmFnZXIuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OEJBQWE7QUFDWCxpQkFEVyxZQUNYLENBQVksT0FBWixFQUFvQjtnQ0FEVCxjQUNTOztBQUNsQixlQUFLLGFBQUwsR0FBcUIsT0FBckIsQ0FEa0I7QUFFbEIsZUFBSyxjQUFMLEdBQXNCLElBQXRCLENBRmtCO1NBQXBCOztBQURXLCtCQVFYLHVDQUFjO0FBQ1osY0FBSSxDQUFDLEtBQUssT0FBTCxFQUFjO0FBQ2pCLGdCQUFJLE9BQU8sSUFBUCxDQURhO0FBRWpCLGlCQUFLLE9BQUwsR0FBZSxPQUFPLFdBQVAsQ0FBbUIsWUFBSztBQUNyQyxtQkFBSyxhQUFMLENBQW1CLGFBQW5CLEdBRHFDO2FBQUwsRUFFL0IsS0FBSyxjQUFMLENBRkgsQ0FGaUI7V0FBbkI7OztBQVRTLCtCQWlCWCxxQ0FBYTtBQUNYLGNBQUksS0FBSyxPQUFMLEVBQ0YsT0FBTyxhQUFQLENBQXFCLEtBQUssT0FBTCxDQUFyQixDQURGOzs7QUFsQlMsK0JBc0JYLG1DQUFZO0FBQ1YsaUJBQU8sS0FBSyxhQUFMLENBREc7OztxQkF0QkQ7OzhCQU1TO0FBQUMsbUJBQU8sS0FBSyxjQUFMLENBQVI7Ozs7ZUFOVCIsImZpbGUiOiJjYWNoZS9jYWNoZS1tYW5hZ2VyLmpzIiwic291cmNlUm9vdCI6Ii9zcmMifQ==

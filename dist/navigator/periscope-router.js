@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['navigator/navigation-history', 'aurelia-framework', 'aurelia-event-aggregator', 'state/user-state-storage', 'state/state-discriminator', 'state/state-url-parser', 'helpers/string-helper', 'helpers/url-helper', 'aurelia-router', 'lodash'], function (_export, _context) {
+System.register(['./navigation-history', 'aurelia-framework', 'aurelia-event-aggregator', './../state/user-state-storage', './../state/state-discriminator', './../state/state-url-parser', './../helpers/string-helper', './../helpers/url-helper', 'aurelia-router', 'lodash'], function (_export, _context) {
   var NavigationHistory, inject, EventAggregator, UserStateStorage, StateDiscriminator, StateUrlParser, StringHelper, UrlHelper, Router, lodash, _createClass, _dec, _class, PeriscopeRouter;
 
   function _classCallCheck(instance, Constructor) {
@@ -10,8 +10,8 @@ System.register(['navigator/navigation-history', 'aurelia-framework', 'aurelia-e
   }
 
   return {
-    setters: [function (_navigatorNavigationHistory) {
-      NavigationHistory = _navigatorNavigationHistory.NavigationHistory;
+    setters: [function (_navigationHistory) {
+      NavigationHistory = _navigationHistory.NavigationHistory;
     }, function (_aureliaFramework) {
       inject = _aureliaFramework.inject;
     }, function (_aureliaEventAggregator) {

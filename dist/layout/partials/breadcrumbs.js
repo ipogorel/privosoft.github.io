@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['jquery', 'aurelia-framework', 'navigator/periscope-router', 'navigator/navigation-history', 'state/user-state-storage'], function (_export, _context) {
+System.register(['jquery', 'aurelia-framework', './../../navigator/periscope-router', './../../navigator/navigation-history', './../../state/user-state-storage'], function (_export, _context) {
   var $, computedFrom, inject, bindable, PeriscopeRouter, NavigationHistory, UserStateStorage, _createClass, _dec, _dec2, _class, _desc, _value, _class2, Breadcrumbs;
 
   function _classCallCheck(instance, Constructor) {

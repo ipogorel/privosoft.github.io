@@ -19,6 +19,7 @@ var config = {
     },
     "dist/vendor-build": {
       includes: [
+        "aurelia-framework",
         'aurelia-bootstrapper',
         'aurelia-fetch-client',
         'aurelia-router',
@@ -28,9 +29,15 @@ var config = {
         'aurelia-templating-router',
         'aurelia-loader-default',
         'aurelia-history-browser',
-          'aurelia-logging-console',
-	  'pegjs',
-        'bootstrap/css/bootstrap.css!text'
+        'aurelia-logging-console',
+        'fetch',
+	      'pegjs',
+        'lodash',
+        'swagger-client',
+        'jquery',
+        'moment',
+        'bootstrap/css/bootstrap.css!text',
+        'bootstrap'
       ],
       options: {
         inject: true,
